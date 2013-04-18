@@ -19,12 +19,16 @@ class SimulationController ( breve.Control ):
 
             # Create agents
             self.agent = agents.SimpleAgent()
+            self.randomAgent = agents.RandomAgent()
 
             print "Simulation Started"
 
         def iterate( self ):
 
-            breve.Control.iterate( self )
+        	#Optional: Make the simulation run a bit slower
+			self.sleep(0.02)
+			
+			breve.Control.iterate(self)
 
 # Start the simulation
 SimulationController()
