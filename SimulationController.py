@@ -18,9 +18,11 @@ class SimulationController ( breve.Control ):
             self.enableSmoothDrawing()
 
             # Create agents
-            self.agent = agents.SimpleAgent()
-            self.randomAgent = agents.RandomAgent()
+            #self.agent = agents.SimpleAgent()
+            #self.randomAgent = agents.RandomAgent()
 
+            breve.createInstances(agents.RandomAgent, 10)
+            
             print "Simulation Started"
 
         def iterate( self ):
