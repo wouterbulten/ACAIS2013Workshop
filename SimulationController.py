@@ -1,5 +1,6 @@
 import breve
 import agents
+import food
 
 class SimulationController ( breve.Control ):
 
@@ -22,7 +23,9 @@ class SimulationController ( breve.Control ):
             #self.randomAgent = agents.RandomAgent()
 
             breve.createInstances(agents.RandomAgent, 10)
-            
+
+            breve.createInstances(food.SimpleFood, 10)
+
             print "Simulation Started"
 
         def iterate( self ):
