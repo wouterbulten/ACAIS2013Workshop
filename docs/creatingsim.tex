@@ -1,3 +1,24 @@
+
+Every simulation starts with a \textit{Controller} which controls the simulation. To make such a controller we extend the \textit{Breve.Control} class and implement two methods: the constructor and a iterate method.
+
 \begin{lstlisting}[language=Python]
-Put your code here.
+import breve
+
+class SimulationController ( breve.Control ):
+
+        def __init__( self ):
+                breve.Control.__init__(self)
+
+                print "Simulation Started"
+
+        def iterate( self ):
+
+                breve.Control.iterate( self )
+
+# Start the simulation
+SimulationController()
 \end{lstlisting}
+
+\mbox{}\\\noindent
+
+Save the code above in a file called \textbf{SimulationController.py}.
