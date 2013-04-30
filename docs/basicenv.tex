@@ -1,0 +1,26 @@
+Our environment is now totally empty. To resolve this we will add a simple floor.
+
+\instruct{In the SimulationController, add the following code in the \textit{\_\_init\_\_} function\footnote{Make sure that you place it after the call to the parent constructor.}:}
+
+\begin{lstlisting}[language=Python]
+
+# Create a floor for the world
+self.floor = breve.Floor()
+self.floor.setTextureImage(None)
+            
+\end{lstlisting}
+
+These two lines add a new floor object (which has a ground plane around $Y=0$). We set the texture to None to prevent the use of the (ugly) default texture.
+
+To improve the visual aspects of the simulation we enable lighting and shadows. This should only be used for demonstration purposes as it makes the simulation run slower.
+
+\instruct{Add the following snippet after the code for the floor:}
+
+\begin{lstlisting}[language=Python]
+# Set display settings
+self.enableLighting()
+self.enableShadows()
+self.moveLight(breve.vector(80,100,0))
+self.enableReflections()
+self.enableSmoothDrawing()
+\end{lstlisting}
