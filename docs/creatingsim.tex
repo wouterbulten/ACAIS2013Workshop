@@ -1,5 +1,5 @@
 
-Every simulation starts with a \textit{Controller} which controls the simulation. To make such a controller we extend the \textit{Breve.Control} class and implement two methods: the constructor and a iterate method.
+Every simulation is based around a \textit{Controller} which controls the simulation. To make such a controller we extend the \textit{Breve.Control} class and implement two methods: the constructor and a iterate method.
 
 \begin{lstlisting}[language=Python]
 import breve
@@ -19,6 +19,16 @@ class SimulationController ( breve.Control ):
 SimulationController()
 \end{lstlisting}
 
-\mbox{}\\\noindent
 
-Save the code above in a file called \textbf{SimulationController.py}.
+
+\begin{itemize}[>]
+	\item \textbf{Save the code above in a file called \textbf{SimulationController.py}.}
+\end{itemize}
+
+The \textit{\_\_init\_\_} function is called when the simulation starts and can be used to initialise other components (such as agents). 
+
+The \textit{iterate} function is called on every iteration in the simulation. It is important to call the parent iterate method in \textit{Breve.Control}, without this the simulation will not run.
+
+\begin{itemize}[>]
+	\item \textbf{ Run the simulation to test your controller.}
+\end{itemize}
