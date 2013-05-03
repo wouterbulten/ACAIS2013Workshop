@@ -22,7 +22,7 @@ class SimulationController ( breve.Control ):
             #self.agent = agents.SimpleAgent()
             #self.randomAgent = agents.RandomAgent()
 
-            breve.createInstances(agents.RandomAgent, 10)
+            breve.createInstances(agents.WanderingAgent, 10)
 
             breve.createInstances(food.SimpleFood, 10)
 
