@@ -1,0 +1,39 @@
+The program essential to this workshop is Breve. In this guide we will be guiding you through all necessary steps. 
+
+\section{Windows}
+In this section it will be explained how to get Breve to work under Windows.
+\subsection{Installation}
+The files will have to be extracted to a location of your choosing. 
+
+\subsection{Setting paths}
+You will have to set two paths. One for Breve and one for the Python version that comes with Breve.
+
+There are two possibilities here. The first one is temporary and has to be run every time you start a new command prompt. It consists of the following two lines:
+\begin{lstlisting}
+set BREVE_CLASS_PATH=<breve_path>\lib\classes
+set PYTHONPATH=\%PYTHONPATH\%;<breve_path>\lib\python2.3
+\end{lstlisting}
+If, for example, you have copied Breve to `C:\\breve\_2.7.2' it would look like this:
+\begin{lstlisting}
+set BREVE_CLASS_PATH=C:\breve_2.7.2\lib\classes
+set PYTHONPATH=\%PYTHONPATH\%;C:\breve_2.7.2\lib\python2.3
+\end{lstlisting}
+
+There is an alternative version which is more permanent, but can easily be undone once it is not required anymore. This is done by changing the environment veriables in the Advanced System Settings:
+\begin{lstlisting}
+Ctrl+R --> Fill in "control sysdm.cpl" --> Press enter to run it --> Advanced --> Environment Variables
+\end{lstlisting}
+% Beter alternatief vinden dan lstlisting
+
+Here you will see two areas, one are the user variables and the other are the system variables. We will be adding two variables to the last one. Simply press "New..." and enter the following information, substituting <breve\_path> with the actual path on your pc:
+\begin{lstlisting}
+Variable name: BREVE_CLASS_PATH
+Variable value: <breve_path>\lib\classes
+\end{lstlisting}
+\begin{lstlisting}
+Variable name: PYTHONPATH
+Variable value: <breve_path>\lib\python2.3
+\end{lstlisting}
+% Nog toevoegen hoe het zit als je al Python in gebruik hebt en al paden hebt ignesteld
+
+\section{Mac OS X}
