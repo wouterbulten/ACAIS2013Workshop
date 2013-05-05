@@ -1,6 +1,6 @@
 import breve
-import food
 import agents
+import food
 import wanderer
 
 class SimulationController ( breve.Control ):
@@ -19,15 +19,13 @@ class SimulationController ( breve.Control ):
             self.enableReflections()
             self.enableSmoothDrawing()
 
-            breve.createInstances(food.SimpleFood, 10)
-           
             # Create agents
             #self.agent = agents.SimpleAgent()
-            self.randomAgent = agents.RandomAgent()
+            #self.randomAgent = agents.RandomAgent()
 
-            #breve.createInstances(agents.RandomAgent, 10)
+            breve.createInstances(agents.RandomAgent, 10)
 
-            
+            breve.createInstances(food.SimpleFood, 10)
 
             print "Simulation Started"
 
