@@ -22,7 +22,7 @@ class SimpleFood (breve.Mobile):
 
 	def randomizedLocation(self):
 
-		randomLoc = breve.randomExpression(2 * breve.vector(10,0,10)) - breve.vector(10,0,10)
+		randomLoc = breve.randomExpression(2 * breve.vector(20,0,20)) - breve.vector(20,0,20)
 
 		self.move(randomLoc)
 

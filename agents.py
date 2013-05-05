@@ -18,7 +18,7 @@ class RandomAgent (breve.Wanderer):
 	def __init__(self):
 		breve.Wanderer.__init__(self)
 
-		self.setWanderRange(breve.vector(10, 0, 10))
+		self.setWanderRange(breve.vector(20.0, 0.0, 20.0))
 
 		# Set the shape of the agent
 		cube = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
@@ -33,16 +33,31 @@ class RandomAgent (breve.Wanderer):
 		# Store a possible food source
 		self.carrying = None
 
+		# Timer to prevent to inhibit the collision behavior
+		self.collidedTimer = 0
+
 		print "Created agent"
 
 	def iterate(self):
-		breve.Wanderer.iterate(self)
+		# Update our food object
+		if(self.carrying):
+			self.carrying.move( ( self.getLocation() - breve.vector( 1, 0, 0 ) ) )
 
+		self.collidedTimer -= 1
+
+		breve.Wanderer.iterate(self)
 
 	def collisionWithFood(self, f):
 		
 		if(f.getOwner()):
 			return
+
+		# We want two iterations without an collision
+		if(self.collidedTimer > 0):
+			self.collidedTimer = 2
+
+		# Set the timer for the collision
+		self.collidedTimer = 2
 
 		if(self.carrying != None):
 			self.placeFoodObject(self.carrying, f)
