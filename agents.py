@@ -77,7 +77,7 @@ class WanderingAgent (breve.Wanderer):
 		desiredVelocity = agents.normalizeVector(self.accelerationTowardsFocus(self.wanderTarget)) * agents.wander_max_velocity
 		steeringVector = desiredVelocity - self.getVelocity()
 
-		self.setVelocity(agents.truncate(self.getVelocity() + steeringVector), agents.wander_max_velocity)
+		self.setVelocity(agents.truncate((self.getVelocity() + steeringVector), agents.wander_max_velocity))
 		#self.setVelocity(breve.vector(1, 0, 1))
 
 		self.wanderTime += 1
@@ -102,6 +102,8 @@ def normalizeVector(vector):
 	vector.x = vector.x / lengthVector
 	vector.y = vector.y / lengthVector
 	vector.z = vector.z / lengthVector
+	
+	return vector
 
 
 def truncate(vector, max):
