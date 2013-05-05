@@ -10,6 +10,13 @@ class SimpleFood (breve.Mobile):
 		# Owner of this food source
 		self.owner = None
 
+		# A nice red color
+		self.setColor(breve.vector(255,0,0))
+
+		# Set the shape of the food source
+		cube = breve.createInstances(breve.Sphere, 1).initWith(0.5)
+		self.setShape(cube)
+
 	def iterate(self):
 		None
 
