@@ -1,6 +1,7 @@
 import breve
 import agents
 import food
+import wanderer
 
 class SimulationController ( breve.Control ):
 
@@ -22,7 +23,7 @@ class SimulationController ( breve.Control ):
             #self.agent = agents.SimpleAgent()
             #self.randomAgent = agents.RandomAgent()
 
-            breve.createInstances(agents.WanderingAgent, 10)
+            breve.createInstances(agents.RandomAgent, 10)
 
             breve.createInstances(food.SimpleFood, 10)
 
