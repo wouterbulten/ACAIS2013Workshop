@@ -7,6 +7,9 @@ class SimpleFood (breve.Mobile):
 
 		self.randomizedLocation()
 
+		# Owner of this food source
+		self.owner = None
+
 	def iterate(self):
 		None
 
@@ -15,3 +18,9 @@ class SimpleFood (breve.Mobile):
 		randomLoc = breve.randomExpression(2 * breve.vector(10,0,10)) - breve.vector(10,0,10)
 
 		self.move(randomLoc)
+
+	def setOwner(self, o):
+		self.owner = o
+
+	def getOwner(self):
+		return self.owner
