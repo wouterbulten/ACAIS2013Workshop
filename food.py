@@ -10,8 +10,8 @@ class SimpleFood (breve.Mobile):
 		# Owner of this food source
 		self.owner = None
 
-		# A nice red color
-		self.setColor(breve.vector(255,0,0))
+		# Placeholder for the group (owner) of the food source
+		self.group = 0
 
 		# Set the shape of the food source
 		cube = breve.createInstances(breve.Sphere, 1).initWith(0.5)
@@ -31,3 +31,9 @@ class SimpleFood (breve.Mobile):
 
 	def getOwner(self):
 		return self.owner
+
+	def setGroup(self, o):
+		self.group = o
+
+	def getGroup(self):
+		return self.group
