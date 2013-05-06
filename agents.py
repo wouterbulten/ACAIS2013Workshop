@@ -62,7 +62,13 @@ class RandomAgent (breve.Wanderer):
 		# Set the timer for the collision
 		self.collidedTimer = 2
 
-		if(self.carrying != None and self.carrying.getGroup() == f.getGroup()):
+		if(self.carrying != None):
+
+			if(self.carrying.getGroup() != f.getGroup() and f.getGroup() != 0):
+				return
+
+			print str(self.carrying.getGroup()) + str(f.getGroup()) + str(self.carrying.getGroup() == f.getGroup())
+
 			self.placeFoodObject(self.carrying, f)
 			self.carrying = None
 			return
