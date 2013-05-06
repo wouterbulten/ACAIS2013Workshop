@@ -33,6 +33,9 @@ class RandomAgent (breve.Wanderer):
 		# Store a possible food source
 		self.carrying = None
 
+		# Group number of this agent
+		self.group = 0
+
 		# Timer to prevent to inhibit the collision behavior
 		self.collidedTimer = 0
 
@@ -59,13 +62,15 @@ class RandomAgent (breve.Wanderer):
 		# Set the timer for the collision
 		self.collidedTimer = 2
 
-		if(self.carrying != None):
+		if(self.carrying != None and self.carrying.getGroup() == f.getGroup()):
 			self.placeFoodObject(self.carrying, f)
 			self.carrying = None
 			return
 
 		self.carrying = f
 		self.carrying.setOwner(self)
+		self.carrying.setColor(self.getColor())
+		self.carrying.setGroup(self.group)
 
 	def placeFoodObject(self, ownFood, placedFood):
 
@@ -75,3 +80,27 @@ class RandomAgent (breve.Wanderer):
 		ownFood.move(location)
 		ownFood.setOwner(0)
 
+
+
+class BlueAgent (RandomAgent):
+
+	def __init__(self):
+		RandomAgent.__init__(self)
+		self.setColor(breve.vector(0,0,0.7))
+		self.group = 1
+
+	def iterate(self):
+
+		RandomAgent.iterate(self)
+
+
+class RedAgent (RandomAgent):
+
+	def __init__(self):
+		RandomAgent.__init__(self)
+		self.setColor(breve.vector(0.7,0,0))
+		self.group = 2
+
+	def iterate(self):
+
+		RandomAgent.iterate(self)

@@ -19,13 +19,13 @@ class SimulationController ( breve.Control ):
             self.enableReflections()
             self.enableSmoothDrawing()
 
-            breve.createInstances(food.SimpleFood, 400)
-           
+            breve.createInstances(food.SimpleFood, 100)
             # Create agents
             #self.agent = agents.SimpleAgent()
             #self.randomAgent = agents.RandomAgent()
 
-            breve.createInstances(agents.RandomAgent, 50)
+            breve.createInstances(agents.BlueAgent, 25)
+            breve.createInstances(agents.RedAgent, 25)
 
             print "Simulation Started"
 
