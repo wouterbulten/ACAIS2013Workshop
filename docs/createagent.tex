@@ -58,6 +58,9 @@ class RandomAgent (breve.Wanderer):
 		breve.Wanderer.__init__(self)
 
 		self.setWanderRange(breve.vector(20, 0, 20))
+		
+		self.randomizeLocation()
+		
 		print "Created agent"
 
 	def iterate(self):
@@ -68,6 +71,12 @@ class RandomAgent (breve.Wanderer):
 \instruct{Add the new agent class below the \textit{SimpleAgent}.}
 
 This \textit{RandomAgent} extends the built in wanderer class of breve. The only setting we have to set is the range of the wanderer, in this case we set it to 20 in a 2D plane. It is important to call the super \textit{iterate} function, otherwise the wander behaviour will not be executed.
+
+\instruct{Add the agent to the simulation by creating one in the constructor of the controller.}
+
+\begin{lstlisting}[language=Python]
+self.randomAgent = agents.RandomAgent()
+\end{lstlisting}
 
 \section{Appearance}
 
@@ -97,3 +106,27 @@ self.setShape(self.controller.getAgentShape())
 \end{lstlisting}
 
 \instruct{Try to change the shape of the agent by adding the code to the constructor of the agent. Test it by running the simulation, has the shape changed?}
+
+\section{Creating a group}
+
+A single agent cannot do much. If we want to see more emergent behaviour we have to create a group. Luckily, the only thing we have to change to accomplish this is changing the way we instantiate agents. Remember that we used the following code in our controller to create a single agent:
+
+\begin{lstlisting}[language=Python]
+self.agent = agents.SimpleAgent()
+\end{lstlisting}
+
+We can now replace this with the following to create any number of agents:
+
+\begin{lstlisting}[language=Python]
+breve.createInstances(agents.RandomAgent, 10)
+\end{lstlisting}
+
+\instruct{Remove the lines that created the two agents and replace it with the snippet above. Run the simulation, you should see 10 wandering agents.}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{graphics/randomagents}
+\caption{By using the a different method of creating agents we can add multiple to the environment. In this instance 10 random agents.}
+\end{center}
+\end{figure}
+
