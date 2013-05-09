@@ -14,8 +14,7 @@ class SimpleFood (breve.Mobile):
 		self.group = 0
 
 		# Set the shape of the food source
-		cube = breve.createInstances(breve.Sphere, 1).initWith(0.5)
-		self.setShape(cube)
+		self.setShape(self.controller.getFoodShape())
 
 	def iterate(self):
 		None

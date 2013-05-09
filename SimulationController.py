@@ -13,6 +13,11 @@ class SimulationController ( breve.Control ):
             self.floor.setTextureImage(None)
             self.floor.move(breve.vector(0, -23, 0))
 
+            # Create a shape for the agents
+            self.agentShape = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
+            # Create a shape for the food sources
+            self.foodShape = breve.createInstances(breve.Sphere, 1).initWith(0.5)
+
             # Set display settings
             self.enableLighting()
             #self.enableShadows()
@@ -39,6 +44,13 @@ class SimulationController ( breve.Control ):
 			#self.sleep(0.02)
 			
 			breve.Control.iterate(self)
+
+
+        def getAgentShape(self):
+            return self.agentShape
+
+        def getFoodShape(self):
+            return self.foodShape
 
 # Start the simulation
 SimulationController()

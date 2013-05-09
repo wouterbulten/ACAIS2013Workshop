@@ -21,8 +21,7 @@ class RandomAgent (breve.Wanderer):
 		self.setWanderRange(breve.vector(20.0, 20.0, 20.0))
 
 		# Set the shape of the agent
-		cube = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
-		self.setShape(cube)
+		self.setShape(self.controller.getAgentShape())
 
 		# Set initial position to random
 		self.randomizeLocation()
