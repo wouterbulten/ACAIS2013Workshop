@@ -18,7 +18,7 @@ class RandomAgent (breve.Wanderer):
 	def __init__(self):
 		breve.Wanderer.__init__(self)
 
-		self.setWanderRange(breve.vector(20.0, 0.0, 20.0))
+		self.setWanderRange(breve.vector(20.0, 20.0, 20.0))
 
 		# Set the shape of the agent
 		cube = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
@@ -67,8 +67,6 @@ class RandomAgent (breve.Wanderer):
 			if(self.carrying.getGroup() != f.getGroup() and f.getGroup() != 0):
 				return
 
-			print str(self.carrying.getGroup()) + str(f.getGroup()) + str(self.carrying.getGroup() == f.getGroup())
-
 			self.placeFoodObject(self.carrying, f)
 			self.carrying = None
 			return
@@ -81,7 +79,7 @@ class RandomAgent (breve.Wanderer):
 	def placeFoodObject(self, ownFood, placedFood):
 
 		location = placedFood.getLocation()
-		location = location + ( breve.randomExpression( breve.vector( 2, 0, 2 ) ) - breve.vector( 1, 0, 1 ) )
+		location = location + ( breve.randomExpression( breve.vector( 2, 2, 2 ) ) - breve.vector( 1, 1, 1 ) )
 
 		ownFood.move(location)
 		ownFood.setOwner(0)
@@ -92,7 +90,7 @@ class BlueAgent (RandomAgent):
 
 	def __init__(self):
 		RandomAgent.__init__(self)
-		self.setColor(breve.vector(0,0,0.7))
+		self.setColor(breve.vector(0.2,0.2,0.8))
 		self.group = 1
 
 	def iterate(self):
@@ -104,7 +102,7 @@ class RedAgent (RandomAgent):
 
 	def __init__(self):
 		RandomAgent.__init__(self)
-		self.setColor(breve.vector(0.7,0,0))
+		self.setColor(breve.vector(0.8,0.2,0.2))
 		self.group = 2
 
 	def iterate(self):
