@@ -1,0 +1,43 @@
+After a floor has been added we can add more objects to our world. We will start with agents.
+
+\instruct{Create a new file agents.py}
+
+As we are going to use functions (and classes) of the breve engine, we must import it at the top of our file.
+
+\begin{lstlisting}[language=Python]
+import breve
+\end{lstlisting}
+
+\instruct{Add the import statement to the top of our agents file.}
+
+\section{Creating a simple agent}
+
+We will start with a very simple agent which will do nothing but stand still. Every agent must extend the \textit{breve.Mobile} class in order for it to move and interact.
+
+Just as with our controller, we have to add a constructor and an \textit{iterate} function.
+
+\begin{lstlisting}[language=Python]
+class SimpleAgent (breve.Mobile):
+
+	def __init__(self):
+		breve.Mobile.__init__(self)
+
+		print "Created agent"
+
+	def iterate(self):
+		None
+\end{lstlisting}
+
+\instruct{Add the class definition above to the agents file.}
+
+\instruct{Try to run the simulation and see what happens.}
+
+As you can see nothing happened yet. This is because we still have to add our agent to the environment. This is done through the simulation controller.
+
+\begin{lstlisting}[language=Python]
+self.agent = agents.SimpleAgent()
+\end{lstlisting}
+
+\instruct{Add the following snippet to the \textit{\_\_init\_\_} function of the controller, just below the lighting settings.}
+
+We now have a single agent in our environment.
