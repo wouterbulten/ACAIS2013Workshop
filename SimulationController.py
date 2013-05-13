@@ -13,6 +13,13 @@ class SimulationController ( breve.Control ):
             self.floor.setTextureImage(None)
             self.floor.move(breve.vector(0, -23, 0))
 
+            self.cameraViewDepth             = 1700          # How far the camera can see
+            self.cameraViewPoint             = breve.vector( 100, 21, -4.8 )
+            self.pointCamera( breve.vector( 0, 0, 0 ), self.cameraViewPoint )
+            # Increase viewing depth
+            self.setZClip(self.cameraViewDepth)
+
+
             # Create a shape for the agents
             self.agentShape = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
             # Create a shape for the food sources
@@ -30,8 +37,9 @@ class SimulationController ( breve.Control ):
             #self.agent = agents.SimpleAgent()
             #self.randomAgent = agents.RandomAgent()
 
-            breve.createInstances(agents.BlueAgent, 50)
-            breve.createInstances(agents.RedAgent, 50)
+            breve.createInstances(wanderer.WanderingAgent, 100)
+            #breve.createInstances(agents.BlueAgent, 50)
+            #breve.createInstances(agents.RedAgent, 50)
 
             # Speeds up the simulation but makes it less accurate
             self.setIntegrationStep( 0.05 )
