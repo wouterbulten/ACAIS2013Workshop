@@ -1,10 +1,11 @@
 import breve
 import math
+import random
 
 # perhaps put at least the wander_distance limit in a config file or something?
-wander_distance_limit = 10
-wander_time_limit = 100
-wander_max_velocity = 2
+wander_distance_limit = 20
+wander_time_limit = 125
+wander_max_velocity = 5
 
 class WanderingAgent (breve.Wanderer):
 	def __init__(self):
@@ -19,43 +20,47 @@ class WanderingAgent (breve.Wanderer):
 		# Set initial position to random
 		self.randomizeLocation()
 
-		self.wanderTime = 0
+		self.wanderTime = random.randint(0, wander_time_limit)
 		self.wanderTarget = breve.randomExpression( 
-					breve.vector( wander_distance_limit*2 , 0, wander_distance_limit*2 ) )  - breve.vector( 
-					wander_distance_limit, 0, wander_distance_limit )
+					2*breve.vector( wander_distance_limit, wander_distance_limit, wander_distance_limit) )  - breve.vector( 
+					wander_distance_limit, wander_distance_limit, wander_distance_limit )
 
 		print "Created Wandering agent"
 
 	def iterate(self):
-### Enable if the agents run act increasingly weirder and go increasingly faster out of map range
-#		if(abs(self.getLocation().x) > (agents.wander_distance_limit - 50) or abs(self.getLocation().z) > (agents.wander_distance_limit - 50)):
-#				self.wanderTime = 0
-#				self.wanderTarget = breve.randomExpression( 
-#						breve.vector( agents.wander_distance_limit*2 , 0, agents.wander_distance_limit*2 ) )  - breve.vector( 
-#						agents.wander_distance_limit, 0, agents.wander_distance_limit )
-#
-#				#print 'resetting wanderTarget due to location becoming out of reach for an agent'
-#				self.setAcceleration(breve.vector())
-#				self.setVelocity(breve.vector())
+	# Enable if the agents run act increasingly weirder and go increasingly faster out of map range
+		if(abs(self.getLocation().x) > (wander_distance_limit) or abs(self.getLocation().z) > (wander_distance_limit) or abs(self.getLocation().y > (wander_distance_limit))):
+				self.wanderTime = 0
+				self.wanderTarget = breve.randomExpression( 
+						breve.vector( wander_distance_limit*2 , wander_distance_limit*2, wander_distance_limit*2 ) )  - breve.vector( 
+						wander_distance_limit, wander_distance_limit, wander_distance_limit )
 
-		if(self.wanderTime > wander_time_limit or dist(self.getLocation(), self.wanderTarget) < 2):
-			self.wanderTarget = breve.randomExpression( 
-					breve.vector( wander_distance_limit*2 , 0, wander_distance_limit*2 ) )  - breve.vector( 
-					wander_distance_limit, 0, wander_distance_limit )
-			self.wanderTime = 0
+				#print 'resetting wanderTarget due to location becoming out of reach for an agent'
+				#self.setAcceleration(breve.vector())
+				#self.setVelocity(breve.vector())
 
-		desiredVelocity = normalizeVector(self.accelerationTowardsFocus(self.wanderTarget)) * wander_max_velocity
-		steeringVector = desiredVelocity - self.getVelocity()
-
-		self.setVelocity(truncate((self.getVelocity() + steeringVector), wander_max_velocity))
-		#self.setVelocity(breve.vector(1, 0, 1))
+		#helping the above bit if it really gets out of hand
+		if(abs(self.getLocation().x) > (wander_distance_limit*2) or abs(self.getLocation().z) > (wander_distance_limit*2) or abs(self.getLocation().y > (wander_distance_limit*2))):
+				#print 'resetting wanderTarget due to location becoming out of reach for an agent'
+				self.setAcceleration(breve.vector())
+				self.setVelocity(breve.vector())
 
 		self.wanderTime += 1
+		if(dist(self.getLocation(), self.wanderTarget) < 5 or self.wanderTime > wander_time_limit):
+			self.wanderTime = 0
+			self.wanderTarget = breve.randomExpression( 
+					breve.vector( wander_distance_limit*2, wander_distance_limit*2, wander_distance_limit*2 ) )  - breve.vector( 
+					wander_distance_limit, wander_distance_limit, wander_distance_limit)
 
-		print 'iterating agent'
+				#print 'wander focus set for agent ' + str(self.agentId) + ' to ' + str(self.wanderFocus.x) + ', ' + str(self.wanderFocus.z)
+
+		desiredVelocity = normalizeVector(self.accelerationTowardsFocus(self.wanderTarget)) * wander_max_velocity
+		steeringVector = (desiredVelocity - self.getVelocity())/10
+
+		self.setVelocity(truncate(self.getVelocity() + steeringVector, wander_max_velocity))
 
 	def accelerationTowardsFocus(self, focus):
-		return (focus - self.getLocation())
+		return (focus - self.getLocation())/1
 
 
 
