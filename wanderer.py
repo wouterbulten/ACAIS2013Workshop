@@ -2,66 +2,63 @@ import breve
 import math
 import random
 
-# perhaps put at least the wander_distance limit in a config file or something?
-wander_distance_limit = 20
-wander_time_limit = 125
-wander_max_velocity = 5
+default_wander_range = 20
+wander_time_limit = 100
+wander_max_velocity = 6
 
-class WanderingAgent (breve.Wanderer):
+class WanderingAgent (breve.Mobile):
 	def __init__(self):
-		breve.Wanderer.__init__(self)
-
-		self.setWanderRange(breve.vector(wander_distance_limit, 0, wander_distance_limit))
+		breve.Mobile.__init__(self)
 
 		# Set the shape of the agent
 		cube = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
 		self.setShape(cube)
 
+		# Just to define that there's a wanderRange
+		self.wanderRange = breve.vector()
+
 		# Set initial position to random
 		self.randomizeLocation()
 
+		# Set random wander time so not all agents switch wandering targets at the same time
 		self.wanderTime = random.randint(0, wander_time_limit)
-		self.wanderTarget = breve.randomExpression( 
-					2*breve.vector( wander_distance_limit, wander_distance_limit, wander_distance_limit) )  - breve.vector( 
-					wander_distance_limit, wander_distance_limit, wander_distance_limit )
+		self.setNewRandomWanderTarget()
 
 		print "Created Wandering agent"
 
 	def iterate(self):
-	# Enable if the agents run act increasingly weirder and go increasingly faster out of map range
-		if(abs(self.getLocation().x) > (wander_distance_limit) or abs(self.getLocation().z) > (wander_distance_limit) or abs(self.getLocation().y > (wander_distance_limit))):
-				self.wanderTime = 0
-				self.wanderTarget = breve.randomExpression( 
-						breve.vector( wander_distance_limit*2 , wander_distance_limit*2, wander_distance_limit*2 ) )  - breve.vector( 
-						wander_distance_limit, wander_distance_limit, wander_distance_limit )
-
-				#print 'resetting wanderTarget due to location becoming out of reach for an agent'
-				#self.setAcceleration(breve.vector())
-				#self.setVelocity(breve.vector())
-
-		#helping the above bit if it really gets out of hand
-		if(abs(self.getLocation().x) > (wander_distance_limit*2) or abs(self.getLocation().z) > (wander_distance_limit*2) or abs(self.getLocation().y > (wander_distance_limit*2))):
-				#print 'resetting wanderTarget due to location becoming out of reach for an agent'
-				self.setAcceleration(breve.vector())
-				self.setVelocity(breve.vector())
-
+		# Increase the wander time
 		self.wanderTime += 1
-		if(dist(self.getLocation(), self.wanderTarget) < 5 or self.wanderTime > wander_time_limit):
+
+		# If the agent is close to its goal or has been chasing its current goal for a long time, pick a new target to go to
+		if(dist(self.getLocation(), self.wanderTarget) < 4 or self.wanderTime > wander_time_limit):
 			self.wanderTime = 0
-			self.wanderTarget = breve.randomExpression( 
-					breve.vector( wander_distance_limit*2, wander_distance_limit*2, wander_distance_limit*2 ) )  - breve.vector( 
-					wander_distance_limit, wander_distance_limit, wander_distance_limit)
+			self.setNewRandomWanderTarget()
 
-				#print 'wander focus set for agent ' + str(self.agentId) + ' to ' + str(self.wanderFocus.x) + ', ' + str(self.wanderFocus.z)
-
+		# Calculate the optimal, normalised velocity if the agent were to go directly to his goal
 		desiredVelocity = normalizeVector(self.accelerationTowardsFocus(self.wanderTarget)) * wander_max_velocity
+
+		# Calculate by how much the agent adjust's its current course
 		steeringVector = (desiredVelocity - self.getVelocity())/10
 
+		# Update an agent's speed
 		self.setVelocity(truncate(self.getVelocity() + steeringVector, wander_max_velocity))
 
 	def accelerationTowardsFocus(self, focus):
 		return (focus - self.getLocation())/1
 
+	def randomizeLocation(self):
+		randomLoc = breve.randomExpression( 2*breve.vector( self.wanderRange.x, self.wanderRange.y, self.wanderRange.z) )  - breve.vector( 
+					self.wanderRange.x, self.wanderRange.y, self.wanderRange.z )
+		self.move(randomLoc)
+
+	def setWanderRange(self, newWanderRange):
+		self.wanderRange = newWanderRange
+		self.setNewRandomWanderTarget()
+
+	def setNewRandomWanderTarget(self):
+		self.wanderTarget = breve.randomExpression( 2*breve.vector( self.wanderRange.x, self.wanderRange.y, self.wanderRange.z) )  - breve.vector( 
+					self.wanderRange.x, self.wanderRange.y, self.wanderRange.z )
 
 
 ####### Help functions for the wanderer

@@ -1,5 +1,6 @@
 import food
 import breve
+import wanderer
 
 
 class SimpleAgent (breve.Mobile):
@@ -13,11 +14,12 @@ class SimpleAgent (breve.Mobile):
 		None
 
 
-class RandomAgent (breve.Wanderer):
+class RandomAgent (wanderer.WanderingAgent):
 
 	def __init__(self):
-		breve.Wanderer.__init__(self)
+		wanderer.WanderingAgent.__init__(self)
 
+		# Set the wander range of the agent
 		self.setWanderRange(breve.vector(20.0, 20.0, 20.0))
 
 		# Set the shape of the agent
@@ -47,7 +49,7 @@ class RandomAgent (breve.Wanderer):
 
 		self.collidedTimer -= 1
 
-		breve.Wanderer.iterate(self)
+		wanderer.WanderingAgent.iterate(self)
 
 	def collisionWithFood(self, f):
 		

@@ -37,9 +37,9 @@ class SimulationController ( breve.Control ):
             #self.agent = agents.SimpleAgent()
             #self.randomAgent = agents.RandomAgent()
 
-            breve.createInstances(wanderer.WanderingAgent, 100)
-            #breve.createInstances(agents.BlueAgent, 50)
-            #breve.createInstances(agents.RedAgent, 50)
+            #breve.createInstances(wanderer.WanderingAgent, 100)
+            breve.createInstances(agents.BlueAgent, 50)
+            breve.createInstances(agents.RedAgent, 50)
 
             # Speeds up the simulation but makes it less accurate
             self.setIntegrationStep( 0.05 )
