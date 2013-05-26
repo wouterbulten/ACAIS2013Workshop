@@ -1,7 +1,7 @@
 \documentclass{beamer}
 
 % \usepackage{beamerthemesplit} // Activate for custom appearance
-
+\usepackage{verbatim}
 \title{Building Artificial Life and Multi-Agent simulations using the Breve engine}
 \author{Wouter Bulten, Frank Dorssers \& Robert-Jan Drenth}
 \date{\textit{ACAIS: Life}, June 6th 2013}
@@ -134,9 +134,47 @@
 
 \section{Building a simulation}
 \frame{
-
+	\frametitle{Building \& running a simulation}
+	
+	\begin{itemize}
+		\item Build simulations in Steve or Python
+		\item Run using the IDE or through command line
+	\end{itemize}
 	
 }
+
+\begin{frame}[fragile]
+
+\begin{columns}
+	\column{0.5\textwidth}
+
+	\textit{Steve}
+	\begin{verbatim}
+		Mobile : Bird (aka Birds) {
+		
+			+ to init:
+				...
+				
+			+ to iterate:
+				...
+		}
+	\end{verbatim}
+
+	\column{0.5\textwidth}
+	\textit{Python}
+	\begin{verbatim}
+class Bird( breve.Mobile ):
+		
+     def __init__( self ):
+         ...
+         
+     def iterate( self ):
+         ...
+         
+	\end{verbatim}
+
+\end{columns}
+\end{frame}
 
 \section{Adding complexity}
 \frame{
