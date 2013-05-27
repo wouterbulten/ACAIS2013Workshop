@@ -1,0 +1,37 @@
+\section{Creating two groups: Red versus Blue}
+Now that we have finished creating a basic Gatherers simulation, it is time to go one step further. When creating an Artificial Life simulation, most of the time you will want to create different conditions of the environment and compare them to each other. We won't really make different conditions, but we will create two groups of agents who will compete with each other in the same world: the \textit{Red Agents} and the \textit{Blue Agents}.
+
+First, we will create two new classes, \textit{RedAgent}  and \textit{BlueAgent} underneath our RandomAgent. These new types of agent will extend our RandomAgent. Then we need a property \textit{group} to indicate to which group they belong. We will also give them a colour so we can distinguish them from each other ourself when we watch the simulation. The color can be specified with the setColor(r, g, b) function where r, g, b are values between 0 and 1 for \textit{red, green} and \textit{blue} respectively. 
+
+These extra properties should be set in the constructor. Naturally, these classes will also need an iterate function. However, these will do nothing special so simply calling the iterate function of the superclass is sufficient. 
+
+\instruct{Add the RedAgent and BlueAgent classes below the RandomAgent class}
+
+\begin{lstlisting}[language=Python]
+class BlueAgent (RandomAgent):
+	def __init__(self):
+		RandomAgent.__init__(self)
+		self.setColor(breve.vector(0.2,0.2,0.8))
+		self.group = 1
+
+	def iterate(self):
+		RandomAgent.iterate(self)
+
+
+class RedAgent (RandomAgent):
+	def __init__(self):
+		RandomAgent.__init__(self)
+		self.setColor(breve.vector(0.8,0.2,0.2))
+		self.group = 2
+
+	def iterate(self):
+		RandomAgent.iterate(self)
+\end{lstlisting}
+
+We will also want to give the RandomAgent a default group it belongs, just to make sure that we will not brake the interaction between food and agents in a bit.
+
+\instruct{In the constructor of RandomAgent, add a line stating that it belongs to group 0}
+
+\begin{lstlisting}[language=Python]
+self.group = 0
+\end{lstlisting}
