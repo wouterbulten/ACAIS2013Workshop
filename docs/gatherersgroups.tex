@@ -35,3 +35,27 @@ We will also want to give the RandomAgent a default group it belongs, just to ma
 \begin{lstlisting}[language=Python]
 self.group = 0
 \end{lstlisting}
+
+Now that we created two new classes for the two groups of agents, we will have to make sure they are actually going to compete with each other (by stealing each other's food). We can do this by taking into account the group an agent belongs to when it interacts with a food source. 
+
+The first step is to mark the food that an agent picks up as belonging to the group of that agent. In order to do this we must first update the \textit{SimpleFood} class so that it supports belonging to a group. We do this by adding a property \textit{group} in the constructor, just like we did for the agents. As all food starts off as neutral, it will belong to group 0. 
+
+\instruct{In the constructor of SimpleFood, add a line stating that it belongs to group 0 (it is still neutral)}
+
+\begin{lstlisting}[language=Python]
+self.group = 0
+\end{lstlisting}
+
+Of course, we will also want to be able to check to what group food belongs to and change it. Thus, we must create a getter and setter function for the group-property.
+
+\instruct{Add a getter and setter for the group-property at the bottom of the class}
+
+\begin{lstlisting}[language=Python]
+def setGroup(self, o):
+	self.group = o
+
+def getGroup(self):
+	return self.group
+\end{lstlisting}
+
+Now we should make use of this property 
