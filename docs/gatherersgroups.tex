@@ -1,7 +1,7 @@
 \section{Creating two groups: Red versus Blue}
 Now that we have finished creating a basic Gatherers simulation, it is time to go one step further. When creating an Artificial Life simulation, most of the time you will want to create different conditions of the environment and compare them to each other. We won't really make different conditions, but we will create two groups of agents who will compete with each other in the same world: the \textit{Red Agents} and the \textit{Blue Agents}.
 
-First, we will create two new classes, \textit{RedAgent}  and \textit{BlueAgent} underneath our RandomAgent. These new types of agent will extend our RandomAgent. Then we need a property \textit{group} to indicate to which group they belong. We will also give them a colour so we can distinguish them from each other ourself when we watch the simulation. The color can be specified with the setColor(r, g, b) function where r, g, b are values between 0 and 1 for \textit{red, green} and \textit{blue} respectively. 
+First, we will create two new classes, \textit{RedAgent}  and \textit{BlueAgent} underneath our RandomAgent. These new types of agent will extend our RandomAgent. Then we need a property \textit{group} to indicate to which group they belong. We will also give them a color so we can distinguish them from each other ourself when we watch the simulation. The color can be specified with the setColor(r, g, b) function where r, g, b are values between 0 and 1 for \textit{red, green} and \textit{blue} respectively. 
 
 These extra properties should be set in the constructor. Naturally, these classes will also need an iterate function. However, these will do nothing special so simply calling the iterate function of the superclass is sufficient. 
 
@@ -58,4 +58,36 @@ def getGroup(self):
 	return self.group
 \end{lstlisting}
 
-Now we should make use of this property 
+Now we should make use of this property by making agents state that the food they pickup belongs to their group. We can do this by updating the \textit{collissionWithFood()} function you created and changing the group-property of the food source with the setter we just created. While we are doing that, we will change the color of the food source as well to be the same as the color of the agent so we can see what is happening in the simulation.
+
+\instruct{Update the RandomAgent's collisionWithFood() function to update the group and color of a food source. Add the following lines to the bottom of the function}
+
+\begin{lstlisting}[language=Python]
+		self.carrying.setColor(self.getColor())
+		self.carrying.setGroup(self.group)
+\end{lstlisting}
+
+Next up, we want to make sure that agents only deposit the food they are carrying near either neutral food or food of their group has already claimed, since they definitely do not want to put it down near the stack of the other group!
+
+To do this, we must once again update the collisionWithFood() function and check to what group the newly encountered food belongs to. If it is neutral food or belongs to the agent's group, the food should be dropped down and the agent can continue on its way. If it belongs to the other group, the agent should hold on to his food and ignore the newly encountered food source. We can do this by simply making the function return.
+
+\instruct{Update the RandomAgent's collisionWithFood() function by adding the follow snippet directly below the if(self.carrying != None):-statement:}
+
+\begin{lstlisting}[language=Python]
+if(self.carrying.getGroup() != f.getGroup() and f.getGroup() != 0):
+	return
+\end{lstlisting}
+
+
+That's it! That's all there is needed in order to create two competing groups of agents that steal each other's food and only put down the food they are holding when they encounter neutral food or food already belonging to their group!
+
+The last thing to do is updating the SimulationController by removing the \textit{breve.createInstances(agents.RandomAgent, 10)}  line and replacing it with two lines that create Red and Blue agents. 
+
+\instruct{Update the SimulationController by creating Red and Blue agents:}
+
+\begin{lstlisting}[language=Python]
+breve.createInstances(agents.RedAgent, 10)
+breve.createInstances(agents.BlueAgent, 10)
+\end{lstlisting}
+
+Now run the simulation and watch the agents claim and gather food for their groups.
