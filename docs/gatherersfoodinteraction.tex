@@ -7,7 +7,7 @@ In our case a food source can only be pushed by one agent. So let us start with 
 self.owner = None
 \end{lstlisting}
 
-\instruct{Add the line above to the \textit{\_\_init\_\_} function of the food}
+\instruct{Add the line initializing the owner to the \textit{\_\_init\_\_} function of the food}
 Now we want to be able to get and set this value from other classes. This can be done by adding a getter and a setter.
 \begin{lstlisting}
 def setOwner(self, o):
@@ -23,7 +23,7 @@ That was all we had to change to the food file. From now on we will be working i
 self.carrying = None
 \end{lstlisting}
 
-\instruct{Add the line above to the \textit{\_\_init\_\_} function of the agent}
+\instruct{Add the line initializing the carrying status to the \textit{\_\_init\_\_} function of the agent}
 First we will define what happens if an agent collides with a food source. There are several possibilities. The food you collide with could already be carried by someone or you have recently collided with another food source, in these two cases you do nothing. If you are carrying food and you collide with a food source that no one is carrying, you place your current food on the ground. If you are not carrying food and none of the above possibilities apply, you will pick the food up.
 \begin{lstlisting}
 def collisionWithFood(self, f):
@@ -47,7 +47,7 @@ def collisionWithFood(self, f):
     self.carrying.setOwner(self)
 \end{lstlisting}
 
-\instruct{Add the function above to the RandomAgent class}
+\instruct{Add the collion function to the RandomAgent class}
 You might have noticed that we talked about placing food, something we will implement now. The food you are carrying is placed near the food you collided with.
 
 \begin{fullwidth}
@@ -62,7 +62,7 @@ def placeFoodObject(self, ownFood, placedFood):
 \end{lstlisting}
 \end{fullwidth}
 
-\instruct{Add the function above to the RandomAgent class}
+\instruct{Add the placeFoodObject function above to the RandomAgent class}
 In the collision function we used a timer which represents how long you have not touched any food. This is so you do not pick up the same object right away. However we have not initialized this variable yet.
 \begin{fullwidth}
 \begin{lstlisting}
@@ -71,19 +71,19 @@ self.collidedTimer = 0
 \end{lstlisting}
 \end{fullwidth}
 
-\instruct{Add the line above to the \textit{\_\_init\_\_} function of the agent}
+\instruct{Add the line initializing the timer to the \textit{\_\_init\_\_} function of the agent}
 Changing the timer will happen in the iterator, so that every refresh this value is decreased.
 
 \begin{lstlisting}
 self.collidedTimer -= 1
 \end{lstlisting}
 
-\instruct{Add the line above to the \textit{iterate} function}
+\instruct{Add the line that decreases the timer to the \textit{iterate} function}
 At the moment we have all necessary functions to describe what happens when you collide with food. We are still missing what actually happens to the food while you are carrying it. When you are carrying food the location of the food should be adjusted along with your location.
 \begin{fullwidth}
 \begin{lstlisting}
 if(self.carrying):
-    self.carrying.move( ( self.getLocation() - breve.vector( 1, 0, 0 ) ) )
+    self.carrying.move((self.getLocation() - breve.vector(1,0,0)))
 \end{lstlisting}
 \end{fullwidth}
 
@@ -95,5 +95,5 @@ We now have all necessary functions to interact with and carry food. But our age
 self.handleCollisions('SimpleFood', 'collisionWithFood')
 \end{lstlisting}
 \end{fullwidth}
-\instruct{Add the if and its body to the \textit{\_\_init\_\_} function of the agent}
+\instruct{Add the breve function and its parameters to the \textit{\_\_init\_\_} function of the agent}
 
