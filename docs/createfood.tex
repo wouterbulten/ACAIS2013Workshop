@@ -39,7 +39,6 @@ self.SimpleFood = food.SimpleFood()
 The food should now have been added to the simulation.
 
 \instruct{Try to run the simulation and see what happens.}
-
 As you can see you have now added a single food object to the field, though it does nothing yet.
 
 \section{Location}
@@ -55,12 +54,14 @@ Now we just have to call this function when we create the food.
 \begin{lstlisting}[language=Python]
 self.randomizedLocation()
 \end{lstlisting}
+
 \instruct{Add the line above to the \textit{\_\_init\_\_} function of the food}
 
 \section{Appearance}
 We will again define one shape for all food sources.
 
 \instruct{Add the following to the constructor of the SimulationController}
+
 \begin{lstlisting}[language=Python]
 # Create a shape for the food sources
 self.foodShape = breve.createInstances(breve.Sphere, 1).initWith(0.5)
@@ -91,8 +92,3 @@ We now want more food objects, this can be done with the following code:
 breve.createInstances(food.SimpleFood, 3)
 \end{lstlisting}
 \instruct{Replace the first piece of code with the second piece of code to create more food objects}
-
-%\section{Interacting with the food}
-%Having food that does nothing is not interesting, we want to be able to do stuff with it. When an agent touches a food source he should pick it up and carry it for a while, before dropping it again.
-
-%All agents are part of a group, just like the food should be. 
