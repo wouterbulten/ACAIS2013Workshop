@@ -4,14 +4,18 @@ The only changes we need to make are to the \textit{agent} and \textit{food} cla
 
 \instruct{Change the \textit{y-value} of wander range of the RandomAgent from 0 to 20}
 
+\begin{fullwidth}
 \begin{lstlisting}[language=Python]
 self.setWanderRange(breve.vector(20, 20, 20))
 \end{lstlisting}
+\end{fullwidth}
 
 \instruct{Change the food.SimpleFood.randomizedLocation() function so that also a random value is taken for the y-axis}
 
+\begin{fullwidth}
 \begin{lstlisting}[language=Python]
 randomLoc = breve.randomExpression(2 * breve.vector(20,20,20)) - breve.vector(20,20,20)
 \end{lstlisting}
+\end{fullwidth}
 
 If you run the simulation now, you will notice how the food sources are scattered in 3D space and how the agents will move through them.

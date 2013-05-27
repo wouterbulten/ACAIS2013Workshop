@@ -43,11 +43,13 @@ As you can see you have now added a single food object to the field, though it d
 
 \section{Location}
 Our food is always at the same location when running the program. We want it to be more random. This can be done with the following function.
+\begin{fullwidth}
 \begin{lstlisting}[language=Python]
 def randomizedLocation(self):
     randomLoc = breve.randomExpression(2 * breve.vector(20,20,20)) - breve.vector(20,20,20)
     self.move(randomLoc)
 \end{lstlisting}
+\end{fullwidth}
 \instruct{Add the function above to the food class}
 
 Now we just have to call this function when we create the food.
@@ -61,12 +63,12 @@ self.randomizedLocation()
 We will again define one shape for all food sources.
 
 \instruct{Add the following to the constructor of the SimulationController}
-
+\begin{fullwidth}
 \begin{lstlisting}[language=Python]
 # Create a shape for the food sources
 self.foodShape = breve.createInstances(breve.Sphere, 1).initWith(0.5)
 \end{lstlisting}
-
+\end{fullwidth}
 This will create a small sphere. To be able to use this shape in our agent we add a getter method to the controller.
 
 \instruct{Add the following getter to the simulation controller:}
