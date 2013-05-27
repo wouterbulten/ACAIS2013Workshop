@@ -1,0 +1,13 @@
+The second object we will be adding is food. This gives our agents something that they can interact with.
+
+\instruct{Create a new file food.py}
+
+As we are going to use functions (and classes) of the breve engine, we must import it at the top of our file.
+
+\begin{lstlisting}[language=Python]
+import breve
+\end{lstlisting}
+
+\section{Creating the food agent}
+
+Our initial version of the food is very simple, it will simply stay on the field. Every food source must extend the \textit{breve.Mobile} class. Food does not have to move, but we want to be able to interact with it.
