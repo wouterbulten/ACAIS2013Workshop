@@ -1,0 +1,17 @@
+As an intermediate step, we are going to switch from a 2D plane to a 3D space to illustrate how easy it is to do so in Breve. Additionally, it will gives us a much nicer view of the final result when we get there. 
+
+The only changes we need to make are to the \textit{agent} and \textit{food} classes; the \textit{wanderer.WanderingAgent} class which our RandomAgent extends is able to handle 2D and 3D spaces just as easily without requiring any changes in the code. 
+
+\instruct{Change the \textit{y-value} of wander range of the RandomAgent from 0 to 20}
+
+\begin{lstlisting}[language=Python]
+self.setWanderRange(breve.vector(20, 20, 20))
+\end{lstlisting}
+
+\instruct{Change the food.SimpleFood.randomizedLocation() function so that also a random value is taken for the y-axis}
+
+\begin{lstlisting}[language=Python]
+randomLoc = breve.randomExpression(2 * breve.vector(20,20,20)) - breve.vector(20,20,20)
+\end{lstlisting}
+
+If you run the simulation now, you will notice how the food sources are scattered in 3D space and how the agents will move through them.

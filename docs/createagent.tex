@@ -53,9 +53,11 @@ This agent is very boring, it just sits there and does nothing. We will create a
 
 \begin{fullwidth}
 \begin{lstlisting}[language=Python]
-class RandomAgent (breve.Wanderer):
+import wanderer
+
+class WanderingAgent (wanderer.WanderingAgent):
 	def __init__(self):
-		breve.Wanderer.__init__(self)
+		wanderer.WanderingAgent.__init__(self)
 
 		self.setWanderRange(breve.vector(20, 0, 20))
 		
@@ -64,13 +66,13 @@ class RandomAgent (breve.Wanderer):
 		print "Created agent"
 
 	def iterate(self):
-		breve.Wanderer.iterate(self)
+		wanderer.WanderingAgent.iterate(self)
 \end{lstlisting}
 \end{fullwidth}
 
 \instruct{Add the new agent class below the \textit{SimpleAgent}.}
 
-This \textit{RandomAgent} extends the built in wanderer class of breve. The only setting we have to set is the range of the wanderer, in this case we set it to 20 in a 2D plane. It is important to call the super \textit{iterate} function, otherwise the wander behaviour will not be executed.
+This \textit{RandomAgent} extends the WanderingAgent class that we programmed for this workshop, so make sure to add the extra import-line at the top of the file. The only setting we have to set is the range of the wanderer, in this case we set it to 20 in a 2D plane. It is important to call the super \textit{iterate} function, otherwise the wander behaviour will not be executed.
 
 \instruct{Add the agent to the simulation by creating one in the constructor of the controller.}
 
