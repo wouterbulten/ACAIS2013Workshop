@@ -63,8 +63,8 @@ Now we should make use of this property by making agents state that the food the
 \instruct{Update the RandomAgent's collisionWithFood() function to update the group and color of a food source. Add the following lines to the bottom of the function}
 
 \begin{lstlisting}[language=Python]
-		self.carrying.setColor(self.getColor())
-		self.carrying.setGroup(self.group)
+self.carrying.setColor(self.getColor())
+self.carrying.setGroup(self.group)
 \end{lstlisting}
 
 Next up, we want to make sure that agents only deposit the food they are carrying near either neutral food or food of their group has already claimed, since they definitely do not want to put it down near the stack of the other group!
@@ -73,11 +73,12 @@ To do this, we must once again update the collisionWithFood() function and check
 
 \instruct{Update the RandomAgent's collisionWithFood() function by adding the follow snippet directly below the if(self.carrying != None):-statement:}
 
+\begin{fullwidth}
 \begin{lstlisting}[language=Python]
 if(self.carrying.getGroup() != f.getGroup() and f.getGroup() != 0):
 	return
 \end{lstlisting}
-
+\end{fullwidth}
 
 That's it! That's all there is needed in order to create two competing groups of agents that steal each other's food and only put down the food they are holding when they encounter neutral food or food already belonging to their group!
 
