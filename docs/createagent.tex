@@ -72,7 +72,7 @@ class WanderingAgent (wanderer.WanderingAgent):
 
 \instruct{Add the new agent class below the \textit{SimpleAgent}.}
 
-This \textit{RandomAgent} extends the WanderingAgent class that we programmed for this workshop, so make sure to add the extra import-line at the top of the file. The only setting we have to set is the range of the wanderer, in this case we set it to 20 in a 2D plane. It is important to call the super \textit{iterate} function, otherwise the wander behaviour will not be executed.
+This \textit{RandomAgent} extends the WanderingAgent class that we created for you \footnote{Feel free to inspect this class later to see how we build it. What it does is it picks a random spot to go to within its allowed wandering range. It will pick a new place to go to once it has reached its previous target or when it has chased its target for a certain amount of time. Once it has picked a new target spot, it will adjust its course accordingly.}, so make sure to add the extra import-line at the top of the file. The only setting we have to set is the range of the wanderer, in this case we set it to 20 in a 2D plane. It is important to call the super \textit{iterate} function, otherwise the wander behaviour will not be executed.
 
 \instruct{Add the agent to the simulation by creating one in the constructor of the controller.}
 

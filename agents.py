@@ -88,24 +88,20 @@ class RandomAgent (wanderer.WanderingAgent):
 
 
 class BlueAgent (RandomAgent):
-
 	def __init__(self):
 		RandomAgent.__init__(self)
 		self.setColor(breve.vector(0.2,0.2,0.8))
 		self.group = 1
 
 	def iterate(self):
-
 		RandomAgent.iterate(self)
 
 
 class RedAgent (RandomAgent):
-
 	def __init__(self):
 		RandomAgent.__init__(self)
 		self.setColor(breve.vector(0.8,0.2,0.2))
 		self.group = 2
 
 	def iterate(self):
-
 		RandomAgent.iterate(self)
