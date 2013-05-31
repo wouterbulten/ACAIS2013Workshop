@@ -9,11 +9,7 @@ wander_max_velocity = 6
 class WanderingAgent (breve.Mobile):
 	def __init__(self):
 		breve.Mobile.__init__(self)
-
-		# Set the shape of the agent
-		cube = breve.createInstances(breve.Cube, 1).initWith(breve.vector(1,1,1))
-		self.setShape(cube)
-
+		
 		# Just to define that there's a wanderRange
 		self.wanderRange = breve.vector()
 
