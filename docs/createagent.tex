@@ -40,6 +40,14 @@ self.agent = agents.SimpleAgent()
 
 \instruct{Add the snippet to the \textit{\_\_init\_\_} function of the controller, just below the lighting settings.}
 
+We also have to add an import to the controller, so it has access to the agent.
+
+\begin{lstlisting}[language=Python]
+import agents.py
+\end{lstlisting}
+
+\instruct{Add the import to the top of SimulationController.py}
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -84,7 +92,7 @@ self.randomAgent = agents.RandomAgent()
 
 Within Breve it is very easy to change the appearance of objects and agents. As an example we are going to change the shape of our agent to a cube. As we will add more agents in the future, we will define one shape object for all agents.
 
-\instruct{Add the following to the constructor of the SimulationController:}
+\instruct{Add the following to the constructor of the SimulationController before the line that creates the agent:}
 \begin{fullwidth}
 \begin{lstlisting}[language=Python]
 # Create a shape for the agents

@@ -8,19 +8,19 @@ As we are going to use functions (and classes) of the breve engine, we must impo
 import breve
 \end{lstlisting}
 
-\instruct{Add the import statement to the top of our agents file.}
+\instruct{Add the import statement to the top of our food file.}
 
 \section{Creating the food object}
 
-Our initial version of the food is very simple, it will simply stay on the field. Every food source must extend the \textit{breve.Mobile} class. Food does not have to move, but we want to be able to interact with it.
+Our initial version of the food is very simple, it will simply stay on the field. Every food source must extend the \textit{breve.Stationary} class. It is not a mobile class like the agent, but rather stationary. We still want to be able to interact with it.
 
 Just as with our controller and agent, we have to add a constructor and an \textit{iterate} function.
 
 \begin{lstlisting}[language=Python]
-class SimpleFood (breve.Mobile):
+class SimpleFood (breve.Stationary):
 
     def __init__(self):
-        breve.Mobile.__init__(self)
+        breve.Stationary.__init__(self)
 
     def iterate(self):
         None
@@ -34,7 +34,15 @@ From the previous section we know that this is not enough. We will also have to 
 self.SimpleFood = food.SimpleFood()
 \end{lstlisting}
 
-\instruct{Add the snippet to the \textit{\_\_init\_\_} function of the controller, just below the lighting settings.}
+\instruct{Add the snippet to the \textit{\_\_init\_\_} function of the controller, above the code that creates the agents}
+
+We also have to add an import to the controller, so it has access to the food.
+
+\begin{lstlisting}[language=Python]
+import food.py
+\end{lstlisting}
+
+\instruct{Add the import to the top of SimulationController.py}
 
 The food should now have been added to the simulation.
 
@@ -45,7 +53,7 @@ As you can see you have now added a single food object to the field, though it d
 Our food is always at the same location when running the program. We want it to be more random. This can be done with the following function.
 \begin{fullwidth}
 \begin{lstlisting}[language=Python]
-def randomizedLocation(self):
+def randomizeLocation(self):
     randomLoc = breve.randomExpression(2 * breve.vector(20,20,20)) - breve.vector(20,20,20)
     self.move(randomLoc)
 \end{lstlisting}
@@ -54,7 +62,7 @@ def randomizedLocation(self):
 
 Now we just have to call this function when we create the food.
 \begin{lstlisting}[language=Python]
-self.randomizedLocation()
+self.randomizeLocation()
 \end{lstlisting}
 
 \instruct{Add the line above to the \textit{\_\_init\_\_} function of the food}
