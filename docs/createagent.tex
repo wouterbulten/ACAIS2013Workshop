@@ -43,7 +43,7 @@ self.agent = agents.SimpleAgent()
 We also have to add an import to the controller, so it has access to the agent.
 
 \begin{lstlisting}[language=Python]
-import agents.py
+import agents
 \end{lstlisting}
 
 \instruct{Add the import to the top of SimulationController.py}
@@ -63,7 +63,7 @@ This agent is very boring, it just sits there and does nothing. We will create a
 \begin{lstlisting}[language=Python]
 import wanderer
 
-class WanderingAgent (wanderer.WanderingAgent):
+class RandomAgent (wanderer.WanderingAgent):
 	def __init__(self):
 		wanderer.WanderingAgent.__init__(self)
 

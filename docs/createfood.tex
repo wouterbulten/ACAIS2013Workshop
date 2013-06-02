@@ -39,7 +39,7 @@ self.SimpleFood = food.SimpleFood()
 We also have to add an import to the controller, so it has access to the food.
 
 \begin{lstlisting}[language=Python]
-import food.py
+import food
 \end{lstlisting}
 
 \instruct{Add the import to the top of SimulationController.py}
@@ -54,7 +54,7 @@ Our food is always at the same location when running the program. We want it to 
 \begin{fullwidth}
 \begin{lstlisting}[language=Python]
 def randomizeLocation(self):
-    randomLoc = breve.randomExpression(2 * breve.vector(20,20,20)) - breve.vector(20,20,20)
+    randomLoc = breve.randomExpression(2 * breve.vector(20,0,20)) - breve.vector(20,20,20)
     self.move(randomLoc)
 \end{lstlisting}
 \end{fullwidth}
