@@ -1,7 +1,7 @@
 \section{Adding interaction between food and agents}
 Having food that does nothing is not interesting, we want to be able to interact with it. When an agent touches a food source he should pick it up and carry it for a while, before dropping it again.
 
-In our case a food source can only be pushed by one agent. So let us start with that. We will have to add an owner to the food to see if it is being pushed.
+In our case a food source can only be carried by one agent. So let us start with that. We will have to add an owner to the food to see if it is being carried.
 
 \begin{lstlisting}
 self.owner = None
@@ -34,6 +34,7 @@ def collisionWithFood(self, f):
     # We want two iterations without an collision
     if(self.collidedTimer > 0):
         self.collidedTimer = 2
+        return
 
     # Set the timer for the collision
     self.collidedTimer = 2
@@ -58,7 +59,7 @@ def placeFoodObject(self, ownFood, placedFood):
     location = location + ( breve.randomExpression( breve.vector( 2, 2, 2 ) ) - breve.vector( 1, 1, 1 ) )
 
     ownFood.move(location)
-    ownFood.setOwner(0)
+    ownFood.setOwner(None)
 \end{lstlisting}
 \end{fullwidth}
 
@@ -78,12 +79,12 @@ Changing the timer will happen in the iterator, so that every refresh this value
 self.collidedTimer -= 1
 \end{lstlisting}
 
-\instruct{Add the line that decreases the timer to the \textit{iterate} function}
+\instruct{Add the line that decreases the timer to the \textit{iterate} function, before the iterate call}
 At the moment we have all necessary functions to describe what happens when you collide with food. We are still missing what actually happens to the food while you are carrying it. When you are carrying food the location of the food should be adjusted along with your location.
 \begin{fullwidth}
 \begin{lstlisting}
 if(self.carrying):
-    self.carrying.move((self.getLocation() - breve.vector(1,0,0)))
+    self.carrying.move(self.getLocation() - breve.vector(1,0,0))
 \end{lstlisting}
 \end{fullwidth}
 
@@ -96,4 +97,6 @@ self.handleCollisions('SimpleFood', 'collisionWithFood')
 \end{lstlisting}
 \end{fullwidth}
 \instruct{Add the breve function and its parameters to the \textit{\_\_init\_\_} function of the agent}
+
+Make sure that you create the food sources before you create the agents. Otherwise the agents will not know what the \textit{SimpleFood} object is.
 
