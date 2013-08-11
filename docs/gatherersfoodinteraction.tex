@@ -48,7 +48,7 @@ def collisionWithFood(self, f):
     self.carrying.setOwner(self)
 \end{lstlisting}
 
-\instruct{Add the collion function to the RandomAgent class}
+\instruct{Add the collision function to the RandomAgent class}
 You might have noticed that we talked about placing food, something we will implement now. The food you are carrying is placed near the food you collided with.
 
 \begin{fullwidth}
@@ -88,7 +88,7 @@ if(self.carrying):
 \end{lstlisting}
 \end{fullwidth}
 
-\instruct{Add the if and its body to the \textit{\_\_init\_\_} function of the agent}
+\instruct{Add the if and its body to the \textit{iterate} function of the agent}
 We now have all necessary functions to interact with and carry food. But our agents do not know yet when they actually collide with food. For this we will use a standard breve function. First you give the object that it is colliding with and next you give the function that should be executed in case of collision.
 \begin{fullwidth}
 \begin{lstlisting}
